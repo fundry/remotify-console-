@@ -25,6 +25,9 @@
   },
   "include": [
     "src",
-    "custom-typings"
+  ],
+  "typeRoots": [
+    "src/customTypings",
+    "node_modules/@types"
   ]
 }
