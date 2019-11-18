@@ -1,10 +1,18 @@
 import React from "react";
+import { Dashboard } from '../'
+import styled from 'styled-components'
+import Flex from 'styled-flex-component'
+
+const Body = styled.div`
+  padding : 1em
+`
 
 const Home = () => {
+
   return (
-    <div>
+    <Body>
       <h1> Profile </h1>
-    </div>
+    </Body>
   );
 };
 

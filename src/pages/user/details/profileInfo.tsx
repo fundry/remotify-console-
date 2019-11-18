@@ -4,11 +4,11 @@ import Flex from 'styled-flex-component';
 import { Image, Tab, Tabs } from 'react-bootstrap';
 import { MdHistory } from 'react-icons/md';
 
+const List: Array<Object> = [{ name: '' }, { name: '' }, { name: '' }];
+
 const profile = () => {
   const Body = styled.div`padding: 0.5em;`;
   const Details = styled.div`padding-top: 17px;`;
-
-  const List: Array<Object> = [{ name: '' }, { name: '' }, { name: '' }];
 
   return (
     <Body>
@@ -18,7 +18,6 @@ const profile = () => {
             <Image
               src={require('./sample.png')}
               style={{ height: '120px', paddingRight: '15px' }}
-              roundedCircle
             />
 
             <Details>
@@ -32,8 +31,9 @@ const profile = () => {
           </Flex>
         </div>
 
+        {/*
         <div>
-          {List.map(({ name }) => {
+          {List.map(() => {
             return (
               <Image
                 src={require('./sample2.png')}
@@ -42,11 +42,11 @@ const profile = () => {
                   paddingRight: '15px',
                   paddingTop: '30px',
                 }}
-                roundedCircle
               />
             );
           })}
         </div>
+        */}
       </Flex>
       <hr />
     </Body>

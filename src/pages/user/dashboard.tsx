@@ -1,20 +1,16 @@
 import React, { useState, useRef } from "react"
-import styled from "@types/styled-components"
+import styled from "styled-components"
 import Flex from "styled-flex-component"
-import { Link } from "gatsby"
 import { useMutation } from "@apollo/react-hooks"
-import { Route, NavLink } from "react-router-dom"
-import { Router, Switch } from "react-router"
+
 import { MdShowChart } from "react-icons/md"
 
 import Charts from "./chart"
-import Header from "../head/header"
-import Layout from "../../components/layout"
+import  { Header} from "../../components/"
 import { CreateTeam } from "../../data/mutations"
 import Department from "./details/departments"
-import Profile from "./details/profile"
 
-const dashboard = () => {
+const Dashboard = (): JSX.Element => {
   const Head = styled.div({
     padding: "0.5em",
     width: "100%",
@@ -71,9 +67,9 @@ const dashboard = () => {
     padding: 1em;
   `
 
-  const [Create, setCreate] = useState(false)
-  const [Chart, setChart] = useState(false)
-  const [Error, setError] = useState(false)
+  const [Create, setCreate] = useState<Boolean>(false)
+  const [Chart, setChart] = useState<Boolean>(false)
+  const [Error, setError] = useState<Boolean>(false)
 
   const createButton = () => {
     setCreate(false)
@@ -81,11 +77,11 @@ const dashboard = () => {
 
   const [createDepartment, { loading }] = useMutation(CreateTeam)
 
-  const refDepartment = useRef("")
+  const refDepartment = useRef<HTMLInputElement>(null)
 
   return (
-    <Layout>
-      <Header style={false} />
+    <div>
+      <Header />
 
       <div>
         <Head
@@ -159,9 +155,7 @@ const dashboard = () => {
         <Details>
           <Flex justifyBetween>
             <Flex column>
-              <Link to="/user/details/profile">
                 <h3> Fundry </h3>
-              </Link>
               <a href="https://fundry.netlify.com"> Fundry website </a>
               <p> helpdesk.remotify@gmail.com </p>
             </Flex>
@@ -188,8 +182,8 @@ const dashboard = () => {
       </div>
 
       {/*  END OF CONTROLLER */}
-    </Layout>
+    </div>
   )
 }
 
-export default dashboard
+export default Dashboard
