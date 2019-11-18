@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react"
-import styled from "styled-components"
+import styled from "@types/styled-components"
 import Flex from "styled-flex-component"
 import { Link } from "gatsby"
 import { useMutation } from "@apollo/react-hooks"

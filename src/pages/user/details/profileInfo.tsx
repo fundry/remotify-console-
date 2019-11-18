@@ -1,18 +1,14 @@
-import React from "react"
-import styled from "styled-components"
-import Flex from "styled-flex-component"
-import { Image, Tab, Tabs } from "react-bootstrap"
-import { MdHistory } from "react-icons/md"
+import React from 'react';
+import styled from 'styled-components';
+import Flex from 'styled-flex-component';
+import { Image, Tab, Tabs } from 'react-bootstrap';
+import { MdHistory } from 'react-icons/md';
 
 const profile = () => {
-  const Body = styled.div`
-    padding: 0.5em;
-  `
-  const Details = styled.div`
-    padding-top: 17px;
-  `
+  const Body = styled.div`padding: 0.5em;`;
+  const Details = styled.div`padding-top: 17px;`;
 
-  const List: Array = [{ name: "" }, { name: "" }, { name: "" }]
+  const List: Array<Object> = [{ name: '' }, { name: '' }, { name: '' }];
 
   return (
     <Body>
@@ -20,8 +16,8 @@ const profile = () => {
         <div>
           <Flex>
             <Image
-              src={require("./sample.png")}
-              style={{ height: "120px", paddingRight: "15px" }}
+              src={require('./sample.png')}
+              style={{ height: '120px', paddingRight: '15px' }}
               roundedCircle
             />
 
@@ -40,21 +36,21 @@ const profile = () => {
           {List.map(({ name }) => {
             return (
               <Image
-                src={require("./sample2.png")}
+                src={require('./sample2.png')}
                 style={{
-                  height: "100px",
-                  paddingRight: "15px",
-                  paddingTop: "30px",
+                  height: '100px',
+                  paddingRight: '15px',
+                  paddingTop: '30px',
                 }}
                 roundedCircle
               />
-            )
+            );
           })}
         </div>
       </Flex>
       <hr />
     </Body>
-  )
-}
+  );
+};
 
-export default profile
+export default profile;
