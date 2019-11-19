@@ -1,23 +1,15 @@
-import React, { useState, useRef } from "react"
-import styled from "styled-components"
-import Flex from "styled-flex-component"
-import { useMutation } from "@apollo/react-hooks"
+import React, { useState, useRef } from "react";
+import styled from "styled-components";
+import Flex from "styled-flex-component";
+import { useMutation } from "@apollo/react-hooks";
 
-import { MdShowChart } from "react-icons/md"
+import { MdShowChart } from "react-icons/md";
 
-import Charts from "./chart"
-import  { Header} from "../../components/"
-import { CreateTeam } from "../../data/mutations"
-import Department from "./details/departments"
+import Charts from "./chart";
+import { Header } from "../../components/";
+import Department from "./details/departments";
 
 const Dashboard = (): JSX.Element => {
-  const Head = styled.div({
-    padding: "0.5em",
-    width: "100%",
-    background: "#361f94",
-    color: "white",
-  })
-
   const Button = styled.button`
     background: #fff;
     text-align: right;
@@ -32,130 +24,60 @@ const Dashboard = (): JSX.Element => {
       color: #fff;
       background: transparent;
     }
-  `
+  `;
 
   const Hover = styled.div({
-    cursor: "pointer",
-  })
+    cursor: "pointer"
+  });
 
   const Details = styled.div`
     padding-left: 2.5em;
     padding-right: 2.5em;
-  `
+  `;
 
   const Sidebar = styled.div`
     position: fixed;
     background: #ccc;
     height: 100vh;
     padding-top: 0em;
-  `
+  `;
 
   const NavLinks = styled.ul`
     list-style: none;
     padding: 0;
     color: #000;
-  `
+  `;
 
   const Link = styled.li`
     display: block;
     padding: 0.8em;
     color: black;
     text-decoration: none;
-  `
+  `;
 
   const Profile = styled.div`
     padding: 1em;
-  `
+  `;
 
-  const [Create, setCreate] = useState<Boolean>(false)
-  const [Chart, setChart] = useState<Boolean>(false)
-  const [Error, setError] = useState<Boolean>(false)
+  const [Create, setCreate] = useState<Boolean>(false);
+  const [Chart, setChart] = useState<Boolean>(false);
+  const [Error, setError] = useState<Boolean>(false);
 
   const createButton = () => {
-    setCreate(false)
-  }
+    setCreate(false);
+  };
 
-  const [createDepartment, { loading }] = useMutation(CreateTeam)
-
-  const refDepartment = useRef<HTMLInputElement>(null)
+  const refDepartment = useRef<HTMLInputElement>(null);
 
   return (
     <div>
       <Header />
 
       <div>
-        <Head
-          style={{
-            boxShadow: "0px 3px 5px grey",
-          }}
-        >
-          <Flex justifyBetween>
-            {!Create ? (
-              <Button onClick={() => setCreate(true)}>
-                <p>Create Department </p>
-              </Button>
-            ) : (
-              <div>
-                <Flex>
-                  <input
-                    style={{
-                      background: "transparent",
-                      color: "white",
-                      border: "0.7px solid white ",
-                      padding: "0.5em",
-                      paddingLeft: "2em",
-                      width: "20em",
-                    }}
-                    ref={refDepartment}
-                    placeholder="Department Name"
-                  />
-
-                  <Button
-                    onClick={() => {
-                      createButton()
-                      createDepartment({
-                        variables: {
-                          name: refDepartment.current.value,
-                        },
-                      })
-                    }}
-                  >
-                    Create
-                  </Button>
-                </Flex>
-              </div>
-            )}
-
-            <p> Departments / Profile </p>
-
-            <div>
-              {!Chart ? (
-                <Hover
-                  onClick={() => {
-                    setChart(true)
-                  }}
-                >
-                  <MdShowChart style={{ fontSize: "2em" }} />
-                </Hover>
-              ) : (
-                <Hover
-                  onClick={() => {
-                    setChart(false)
-                  }}
-                >
-                  <p> Board View </p>
-                </Hover>
-              )}
-            </div>
-          </Flex>
-        </Head>
-
-        <br />
-
         <Details>
           <Flex justifyBetween>
             <Flex column>
-                <h3> Fundry </h3>
+              <h3> Fundry </h3>
               <a href="https://fundry.netlify.com"> Fundry website </a>
               <p> helpdesk.remotify@gmail.com </p>
             </Flex>
@@ -183,7 +105,7 @@ const Dashboard = (): JSX.Element => {
 
       {/*  END OF CONTROLLER */}
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
