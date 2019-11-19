@@ -1,19 +1,19 @@
 import React from "react";
-import { ApolloProvider } from '@apollo/react-hooks'
-import { Provider  } from 'mobx-react'
+import { ApolloProvider } from "@apollo/react-hooks";
+import { Provider } from "mobx-react";
 
-import config from './data/config'
-import Route from './pages/routes'
-import { AuthStore } from './state/'
+import config from "./data/config";
+import Route from "./pages/routes";
+import { AuthStore } from "./state/";
 
 //all routes will come here
-function App():JSX.Element {
+function App(): JSX.Element {
   return (
-    <Provider AuthStore={AuthStore} >
-      <ApolloProvider client={config} >
-           <Route />
-     </ApolloProvider>
-   </Provider>
+    <Provider AuthStore={AuthStore}>
+      <ApolloProvider client={config}>
+        <Route />
+      </ApolloProvider>
+    </Provider>
   );
 }
 
