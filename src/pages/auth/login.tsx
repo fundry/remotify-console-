@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Card } from "react-bootstrap";
 import styled from "styled-components";
 import Flex from "styled-flex-component";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 const Login = (): JSX.Element => {
   const Body = styled.div`
@@ -9,7 +10,7 @@ const Login = (): JSX.Element => {
   `;
 
   const CardHead = styled.div`
-  padding : 0.5em
+  padding : 1em
   color : #fff
   text-align : center
   background : blue
@@ -32,10 +33,6 @@ const Login = (): JSX.Element => {
   padding-bottom : 15px
 `;
 
-  const Text = styled.p`
-    fontsize: 1.2em;
-  `;
-
   const Button = styled.button`
     background: #361f94;
     text-align: right;
@@ -52,6 +49,10 @@ const Login = (): JSX.Element => {
     }
   `;
 
+  const Text = styled.p`
+    font-size: 1.2em;
+  `;
+
   const NameInput = useRef<HTMLInputElement>();
   const [Name, setName] = useState<Boolean>(false);
 
@@ -63,10 +64,13 @@ const Login = (): JSX.Element => {
       <br />
 
       <Heading>
-        <h2> Remotify </h2>
+        <h2>
+          {" "}
+          <a> Remotify </a>{" "}
+        </h2>
         <Text>
-          Login to use the Remotify Console <br /> for your Organization ,
-          Hackathon , Team.
+          Login to use the Remotify Console <br /> for your Team, Hackathon and
+          Organization.
         </Text>
       </Heading>
 
@@ -111,7 +115,15 @@ const Login = (): JSX.Element => {
 
             <br />
             <div style={{ textAlign: "right" }}>
-              <Button> Continue </Button>
+              <Button>
+                <Flex>
+                  {" "}
+                  <p style={{ paddingRight: "5px" }}>Continue </p>
+                  <IoIosArrowRoundForward
+                    style={{ fontSize: "1.5em", color: "white" }}
+                  />{" "}
+                </Flex>
+              </Button>
             </div>
 
             <div>
