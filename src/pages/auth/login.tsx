@@ -30,8 +30,12 @@ const Login = (props): JSX.Element => {
   width : 25em
   padding-left : 10px
   border: 1.1px solid #361f94
-  font-size : 1.2em
+  font-size : 1.1em
   border-radius : 3px
+  ${media.lessThan("small")`
+   font-size: 1em
+   width : 20em
+`};
 `;
 
   const Heading = styled.div`
@@ -57,11 +61,22 @@ const Login = (props): JSX.Element => {
 
   const Text = styled.p`
     font-size: 1.2em;
+    ${media.lessThan("small")`
+     font-size: 1.05em
+  `};
   `;
 
   const Error = styled.p`
     padding-right : 5px
     padding-top : 4px
+  `;
+
+  const Workspace = styled.p`
+    font-size: 1.2em
+    font-weight:  bold
+    ${media.lessThan("small")`
+     font-size: 1.1em
+  `};
   `;
 
   const validation = Yup.object().shape({
@@ -78,6 +93,18 @@ const Login = (props): JSX.Element => {
   const [Name, setName] = useState<Boolean>(false);
   const [Loading, setLoading] = useState<Boolean>(false);
   const { AuthUser } = props.AuthStore;
+
+  const Title = styled.h2`
+    ${media.lessThan("small")`
+       font-size: 1.7em
+    `};
+  `;
+
+  const CardHeadText = styled.h4`
+    font-weight: normal ${media.lessThan("small")`
+     font-size: 1.3em
+    `};
+  `;
 
   const checkUser = () => {
     setLoading(true);
@@ -97,10 +124,10 @@ const Login = (props): JSX.Element => {
       <br />
 
       <Heading>
-        <h2>
+        <Title>
           {" "}
           <a href="https://remotify.netlify.com"> Remotify </a>{" "}
-        </h2>
+        </Title>
         <Text>
           Login to use the Remotify Console <br /> for your Team, Hackathon and
           Organization.
@@ -146,10 +173,9 @@ const Login = (props): JSX.Element => {
                 <form>
                   <div>
                     <div style={{ paddingBottom: "5px", paddingLeft: "10px" }}>
-                      <p style={{ fontSize: "1.2em", fontWeight: "bold" }}>
-                        {" "}
+                      <Workspace>
                         Workspace {!Name ? "Name" : "Password"}
-                      </p>
+                      </Workspace>
                     </div>
 
                     <Formik
@@ -175,11 +201,17 @@ const Login = (props): JSX.Element => {
                                 ref={NameInput}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
+                                value={values.name}
                               />
-                              <Flex>
-                                <IoIosWarning style={{ fontSize: "1.5em" }} />
-                                <Error> {errors.name} </Error>
-                              </Flex>
+
+                              {errors ? (
+                                <Flex>
+                                  <IoIosWarning
+                                    style={{ fontSize: "1.5em", color: "red" }}
+                                  />
+                                  <Error> {errors.name} </Error>
+                                </Flex>
+                              ) : null}
                             </div>
                           ) : (
                             <div>
@@ -191,10 +223,19 @@ const Login = (props): JSX.Element => {
                                 ref={NameInput}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
+                                value={values.password}
                               />
+
+                              {errors ? (
+                                <Flex>
+                                  <IoIosWarning
+                                    style={{ fontSize: "1.5em", color: "red" }}
+                                  />
+                                  <Error> {errors.name} </Error>
+                                </Flex>
+                              ) : null}
                             </div>
                           )}
-                          <Error> {errors.password} </Error>
                         </div>
                       )}
                     </Formik>
