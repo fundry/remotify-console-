@@ -44,7 +44,7 @@ const Login = (): JSX.Element => {
     padding: 0.25em 1.5em;
     font-size: 1em;
     &:hover {
-      color: #fff;
+      color: #0e2f5a;
       background: transparent;
     }
   `;
@@ -86,38 +86,37 @@ const Login = (): JSX.Element => {
 
           <CardBody style={{ padding: "1em" }}>
             <form>
-              {!Name ? (
-                <div>
-                  <div style={{ paddingBottom: "5px", paddingLeft: "10px" }}>
-                    <p style={{ fontSize: "1.2em", fontWeight: "bold" }}>
-                      {" "}
-                      Workspace Name{" "}
-                    </p>
-                  </div>
-
+              <div>
+                <div style={{ paddingBottom: "5px", paddingLeft: "10px" }}>
+                  <p style={{ fontSize: "1.2em", fontWeight: "bold" }}>
+                    {" "}
+                    Workspace {!Name ? "Name" : "Password"}
+                  </p>
+                </div>
+                {!Name ? (
                   <Input
                     type="text"
                     placeholder="Office Name"
                     ref={NameInput}
                   />
-                </div>
-              ) : (
-                <div>
-                  <label> Workspace Password </label>
+                ) : (
                   <Input
-                    type="text"
+                    type="password"
                     placeholder="Office Password"
                     ref={NameInput}
                   />
-                </div>
-              )}
+                )}
+              </div>
             </form>
 
             <br />
             <div style={{ textAlign: "right" }}>
-              <Button>
+              <Button
+                onClick={() => {
+                  setName(true);
+                }}
+              >
                 <Flex>
-                  {" "}
                   <p style={{ paddingRight: "5px" }}>Continue </p>
                   <IoIosArrowRoundForward
                     style={{ fontSize: "1.7em", color: "white" }}
@@ -130,7 +129,6 @@ const Login = (): JSX.Element => {
               <br />
               <Text style={{ paddingLeft: "15px", textAlign: "center" }}>
                 <a href="https://remotify.netlify.com/register/services">
-                  {" "}
                   Create{" "}
                 </a>{" "}
                 an account
