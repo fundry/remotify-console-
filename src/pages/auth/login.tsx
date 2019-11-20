@@ -9,6 +9,8 @@ import media from "styled-media-query";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import useWindowWidth from "../../hooks_style";
+
 const Login = (props): JSX.Element => {
   const Body = styled.div`
     padding: 1em;
@@ -93,6 +95,7 @@ const Login = (props): JSX.Element => {
   const [Name, setName] = useState<Boolean>(false);
   const [Loading, setLoading] = useState<Boolean>(false);
   const { AuthUser } = props.AuthStore;
+  const hooks = useWindowWidth();
 
   const Title = styled.h2`
     ${media.lessThan("small")`
@@ -103,6 +106,14 @@ const Login = (props): JSX.Element => {
   const CardHeadText = styled.h4`
     font-weight: normal ${media.lessThan("small")`
      font-size: 1.3em
+    `};
+  `;
+
+  const Org = styled.h4`
+    font-weight: normal
+    text-align: center
+    ${media.lessThan("small")`
+      font-size: 1.4em
     `};
   `;
 
@@ -118,7 +129,6 @@ const Login = (props): JSX.Element => {
 
   return (
     <Body>
-      <br />
       <br />
       <br />
       <br />
@@ -154,14 +164,11 @@ const Login = (props): JSX.Element => {
                       <Image
                         fluid
                         src={require("../../images/lawyer.png")}
-                        style={{ width: "25%", height: "130px" }}
+                        style={{ height: "110px" }}
                         roundedCircle
                       />{" "}
                     </Flex>
-                    <h4 style={{ fontWeight: "normal", textAlign: "center" }}>
-                      {" "}
-                      Fundry Organization{" "}
-                    </h4>
+                    <Org> Fundry Organization </Org>
                     <br />{" "}
                   </div>
                 </Flex>
