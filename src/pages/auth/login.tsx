@@ -2,9 +2,14 @@ import React, { useRef, useState } from "react";
 import { Card, Spinner, Image } from "react-bootstrap";
 import styled from "styled-components";
 import Flex from "styled-flex-component";
-import { IoIosArrowRoundForward } from "react-icons/io";
+import { IoIosArrowRoundForward, IoIosWarning } from "react-icons/io";
+import { Link } from "react-router-dom";
+import { observer, inject } from "mobx-react";
+import media from "styled-media-query";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
-const Login = (): JSX.Element => {
+const Login = (props): JSX.Element => {
   const Body = styled.div`
     padding: 1em;
   `;
@@ -54,12 +59,29 @@ const Login = (): JSX.Element => {
     font-size: 1.2em;
   `;
 
+  const Error = styled.p`
+    padding-right : 5px
+    padding-top : 4px
+  `;
+
+  const validation = Yup.object().shape({
+    name: Yup.string()
+      .min(8, "Not less than 3")
+      .max(24, "More than 25")
+      .required("must have a name "),
+    password: Yup.string()
+      .max(37, "More than 25")
+      .required("must have a password ")
+  });
+
   const NameInput = useRef<HTMLInputElement>();
   const [Name, setName] = useState<Boolean>(false);
   const [Loading, setLoading] = useState<Boolean>(false);
+  const { AuthUser } = props.AuthStore;
 
   const checkUser = () => {
     setLoading(true);
+    AuthUser();
 
     setTimeout(() => {
       setName(true);
@@ -129,44 +151,84 @@ const Login = (): JSX.Element => {
                         Workspace {!Name ? "Name" : "Password"}
                       </p>
                     </div>
-                    {!Name ? (
-                      <Input
-                        type="text"
-                        placeholder="Office Name"
-                        ref={NameInput}
-                      />
-                    ) : (
-                      <div>
-                        <Input
-                          type="password"
-                          placeholder="Office Password"
-                          ref={NameInput}
-                        />
-                      </div>
-                    )}
+
+                    <Formik
+                      initialValues={{ name: "", password: "" }}
+                      validationSchema={validation}
+                      onSubmit={(values, { setSubmitting }) => {}}
+                    >
+                      {({
+                        isSubmitting,
+                        handleChange,
+                        handleBlur,
+                        values,
+                        errors
+                      }) => (
+                        <div>
+                          {!Name ? (
+                            <div>
+                              <label htmlFor="name" />
+                              <Input
+                                id="name"
+                                type="text"
+                                placeholder="Office Name"
+                                ref={NameInput}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                              />
+                              <Flex>
+                                <IoIosWarning style={{ fontSize: "1.5em" }} />
+                                <Error> {errors.name} </Error>
+                              </Flex>
+                            </div>
+                          ) : (
+                            <div>
+                              <label htmlFor="password" />
+                              <Input
+                                id="password"
+                                type="password"
+                                placeholder="Office Password"
+                                ref={NameInput}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                              />
+                            </div>
+                          )}
+                          <Error> {errors.password} </Error>
+                        </div>
+                      )}
+                    </Formik>
                   </div>
                 </form>
-
                 <br />
-                <div style={{ textAlign: "right" }}>
-                  <Button
-                    onClick={() => {
-                      checkUser();
-                    }}
-                  >
-                    <Flex>
-                      <p style={{ paddingRight: "5px" }}>Continue </p>
-                      <IoIosArrowRoundForward
-                        style={{ fontSize: "1.7em", color: "white" }}
-                      />{" "}
-                    </Flex>
-                  </Button>
+                <div style={{ textAlign: !Name ? "right" : "center" }}>
+                  {!Name ? (
+                    <Button
+                      onClick={() => {
+                        checkUser();
+                      }}
+                    >
+                      <Flex>
+                        <p style={{ paddingRight: "5px" }}>Continue </p>
+                        <IoIosArrowRoundForward
+                          style={{ fontSize: "1.7em", color: "white" }}
+                        />{" "}
+                      </Flex>
+                    </Button>
+                  ) : (
+                    <Link to="/profile">
+                      {" "}
+                      <Button>
+                        <Flex>Login</Flex>
+                      </Button>{" "}
+                    </Link>
+                  )}
                 </div>
               </div>
             ) : (
               <div style={{ padding: "2em" }}>
                 <br />
-                <Flex>
+                <Flex justifyCenter>
                   <Spinner animation="grow" variant="primary" />
                   <Spinner animation="grow" variant="secondary" />
                   <Spinner animation="grow" variant="success" />
@@ -195,4 +257,4 @@ const Login = (): JSX.Element => {
   );
 };
 
-export default Login;
+export default inject("AuthStore")(observer(Login));

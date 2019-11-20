@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route, Switch } from "react-router";
+import { Router, Route, Switch, Redirect } from "react-router";
 import { createBrowserHistory } from "history";
 import { inject, observer } from "mobx-react";
 
@@ -8,17 +8,26 @@ import Protected from "./protectedRoute";
 
 const history = createBrowserHistory();
 
-const Routes = (): JSX.Element => {
+const Routes = (props): JSX.Element => {
+  const { authenticated } = props.AuthStore;
   return (
     <Router history={history}>
       <Switch>
         <Route path="/login" component={Login} />
 
-        <Protected exact path="/" component={Dashboard} />
-        <Protected exact path="/profile" component={Dashboard} />
+        <Protected
+          path="/"
+          authenticated={authenticated}
+          component={Dashboard}
+        />
+        <Protected
+          path="/profile"
+          authenticated={authenticated}
+          component={Dashboard}
+        />
       </Switch>
     </Router>
   );
 };
 
-export default Routes;
+export default inject("AuthStore")(observer(Routes));

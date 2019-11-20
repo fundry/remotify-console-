@@ -1,20 +1,18 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { inject, observer } from "mobx-react";
 
 interface CustomProps {
   component: any;
   path: String;
-  exact: any;
+  authenticated: Boolean;
 }
 
-const ProtectedRoute = (
-  props,
-  { component: Component, exact, path, ...rest }: CustomProps
-) => {
-  // const { authenticated } = props.AuthStore
-  const { authenticated } = props.AuthStore;
-
+const ProtectedRoute = ({
+  component: Component,
+  authenticated,
+  path,
+  ...rest
+}: CustomProps): JSX.Element => {
   return (
     <div>
       <Route
@@ -31,4 +29,4 @@ const ProtectedRoute = (
   );
 };
 
-export default inject("AuthStore")(observer(ProtectedRoute));
+export default ProtectedRoute;

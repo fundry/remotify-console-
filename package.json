@@ -35,7 +35,8 @@
     "styled-components": "^4.4.1",
     "styled-flex-component": "^3.0.0",
     "styled-media-query": "^2.1.2",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.2",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
