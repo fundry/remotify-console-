@@ -23,7 +23,34 @@ const Login = (): JSX.Element => {
   height : 6vh
   width : 25em
   padding-left : 10px
+  border: 1.1px solid #361f94
+  font-size : 1.2em
 `;
+
+  const Heading = styled.div`
+  text-align : center
+  padding-bottom : 15px
+`;
+
+  const Text = styled.p`
+    fontsize: 1.2em;
+  `;
+
+  const Button = styled.button`
+    background: #361f94;
+    text-align: right;
+    border-radius: 3px;
+    height: 35px;
+    border: 1px solid #0e2f5a;
+    color: #fff;
+    margin: 0 1em;
+    padding: 0.25em 1.5em;
+    font-size: 1em;
+    &:hover {
+      color: #fff;
+      background: transparent;
+    }
+  `;
 
   const NameInput = useRef<HTMLInputElement>();
   const [Name, setName] = useState<Boolean>(false);
@@ -31,27 +58,39 @@ const Login = (): JSX.Element => {
   return (
     <Body>
       <br />
+      <br />
+      <br />
+      <br />
 
-      <div>
+      <Heading>
         <h2> Remotify </h2>
-      </div>
+        <Text>
+          Login to use the Remotify Console <br /> for your Organization ,
+          Hackathon , Team.
+        </Text>
+      </Heading>
 
       <Flex justifyCenter>
         <Card
           style={{
-            padding: "1em",
-            boxShadow: "0px 3px 5px grey"
+            boxShadow: "0px 5px 7px grey"
           }}
         >
           <CardHead>
             <h4> Sign in </h4>
           </CardHead>
 
-          <CardBody>
+          <CardBody style={{ padding: "1em" }}>
             <form>
               {!Name ? (
                 <div>
-                  <label> Workspace Name </label>
+                  <div style={{ paddingBottom: "5px", paddingLeft: "10px" }}>
+                    <p style={{ fontSize: "1.2em", fontWeight: "bold" }}>
+                      {" "}
+                      Workspace Name{" "}
+                    </p>
+                  </div>
+
                   <Input
                     type="text"
                     placeholder="Office Name"
@@ -69,6 +108,18 @@ const Login = (): JSX.Element => {
                 </div>
               )}
             </form>
+
+            <br />
+            <div style={{ textAlign: "right" }}>
+              <Button> Continue </Button>
+            </div>
+
+            <div>
+              <br />
+              <Text style={{ paddingLeft: "15px", textAlign: "center" }}>
+                <a href="https://remotify.netlfiy.com"> Create </a> an account
+              </Text>
+            </div>
           </CardBody>
         </Card>
       </Flex>

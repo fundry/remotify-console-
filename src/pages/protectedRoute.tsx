@@ -1,22 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-interface Props {
+interface CustomProps {
   component: any;
   path: String;
   exact: any;
-  // props: any
 }
 
 const ProtectedRoute = (
-  { component: Component, exact, path, ...rest }: Props,
-  props
+  props,
+  { component: Component, exact, path, ...rest }: CustomProps
 ) => {
   // const { authenticated } = props.AuthStore
-  console.log(props);
-
-  const [authenticated, Setauthenticated] = useState<Boolean>(false);
+  const { authenticated } = props.AuthStore;
 
   return (
     <div>
