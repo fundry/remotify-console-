@@ -2,4 +2,4 @@
 
 <p> This console is an admin  board for those using the [Remotify](https://remotify.netlify.com)service </p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p> Temporarily hosted at [Remotify](https://app-remotify.netlify.com)for testing purposes. </p>

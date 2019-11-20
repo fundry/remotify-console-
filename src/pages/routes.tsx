@@ -3,7 +3,7 @@ import { Router, Route, Switch, Redirect } from "react-router";
 import { createBrowserHistory } from "history";
 import { inject, observer } from "mobx-react";
 
-import { Dashboard, Login } from "./";
+import { Dashboard, Login, Profile } from "./";
 import Protected from "./protectedRoute";
 
 const history = createBrowserHistory();
@@ -16,14 +16,14 @@ const Routes = (props): JSX.Element => {
         <Route path="/login" component={Login} />
 
         <Protected
-          path="/"
+          path="/dashboard"
           authenticated={authenticated}
           component={Dashboard}
         />
         <Protected
           path="/profile"
           authenticated={authenticated}
-          component={Dashboard}
+          component={Profile}
         />
       </Switch>
     </Router>

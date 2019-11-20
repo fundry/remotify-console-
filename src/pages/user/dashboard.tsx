@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import Flex from "styled-flex-component";
 import { useMutation } from "@apollo/react-hooks";
-
+import { Link as NavLink } from "react-router-dom";
 import { MdShowChart } from "react-icons/md";
 
 import Charts from "./chart";
@@ -77,8 +77,11 @@ const Dashboard = (): JSX.Element => {
         <Details>
           <Flex justifyBetween>
             <Flex column>
-              <h3> Fundry </h3>
-              <a href="https://fundry.netlify.com"> Fundry website </a>
+              <NavLink to="/profile">
+                <h3> Fundry </h3>
+              </NavLink>
+
+              <a href="https://fundry.netlify.com"> Fundry.com </a>
               <p> helpdesk.remotify@gmail.com </p>
             </Flex>
 

@@ -1,14 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
-import Flex from 'styled-flex-component';
-import { Image, Tab, Tabs } from 'react-bootstrap';
-import { MdHistory } from 'react-icons/md';
+import React from "react";
+import styled from "styled-components";
+import Flex from "styled-flex-component";
+import { Image, Tab, Tabs } from "react-bootstrap";
+import { MdHistory } from "react-icons/md";
 
-const List: Array<Object> = [{ name: '' }, { name: '' }, { name: '' }];
+const List: Array<Object> = [{ name: "" }, { name: "" }, { name: "" }];
 
 const profile = () => {
-  const Body = styled.div`padding: 0.5em;`;
-  const Details = styled.div`padding-top: 17px;`;
+  const Body = styled.div`
+    padding: 0.5em;
+  `;
+  const Details = styled.div`
+    padding-top: 17px;
+  `;
 
   return (
     <Body>
@@ -16,8 +20,8 @@ const profile = () => {
         <div>
           <Flex>
             <Image
-              src={require('./sample.png')}
-              style={{ height: '120px', paddingRight: '15px' }}
+              src={require("./sample.png")}
+              style={{ height: "120px", paddingRight: "15px" }}
             />
 
             <Details>

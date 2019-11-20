@@ -264,8 +264,7 @@ const Login = (props): JSX.Element => {
                       </Flex>
                     </Button>
                   ) : (
-                    <Link to="/profile">
-                      {" "}
+                    <Link to="/dashboard">
                       <Button>
                         <Flex>Login</Flex>
                       </Button>{" "}

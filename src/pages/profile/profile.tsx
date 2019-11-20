@@ -1,18 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
-import Flex from 'styled-flex-component';
-import { Image, Tab, Tabs } from 'react-bootstrap';
+import React from "react";
+import styled from "styled-components";
+import Flex from "styled-flex-component";
+import { Image, Tab, Tabs } from "react-bootstrap";
 // import { MdHistory } from 'react-icons/md';
 
-import { Header } from '../../../components/';
-import ProfileInfo from './profileInfo';
+import { Header } from "../../components/";
+import ProfileInfo from "./profileInfo";
 
-import Activity from './activity';
-import Billing from './billing';
+import Activity from "./activity";
+import Billing from "./billing";
 
-const profile = () => {
-  const Body = styled.div`padding: 0.5em;`;
-  const Details = styled.div`padding-top: 20px;`;
+const profile = (): JSX.Element => {
+  const Body = styled.div`
+    padding: 0.5em;
+  `;
+  const Details = styled.div`
+    padding-top: 20px;
+  `;
 
   // const List: Array = [{ name: '' }, { name: '' }, { name: '' }];
 
@@ -24,7 +28,7 @@ const profile = () => {
         <ProfileInfo />
 
         <Tabs
-          style={{ textAlign: 'center' }}
+          style={{ textAlign: "center" }}
           defaultActiveKey="profile"
           id="uncontrolled-tab-exampale"
         >
