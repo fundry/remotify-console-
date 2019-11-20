@@ -66,7 +66,7 @@ const Login = (): JSX.Element => {
       <Heading>
         <h2>
           {" "}
-          <a> Remotify </a>{" "}
+          <a href="https://remotify.netlify.com"> Remotify </a>{" "}
         </h2>
         <Text>
           Login to use the Remotify Console <br /> for your Team, Hackathon and
@@ -120,7 +120,7 @@ const Login = (): JSX.Element => {
                   {" "}
                   <p style={{ paddingRight: "5px" }}>Continue </p>
                   <IoIosArrowRoundForward
-                    style={{ fontSize: "1.5em", color: "white" }}
+                    style={{ fontSize: "1.7em", color: "white" }}
                   />{" "}
                 </Flex>
               </Button>
@@ -129,7 +129,11 @@ const Login = (): JSX.Element => {
             <div>
               <br />
               <Text style={{ paddingLeft: "15px", textAlign: "center" }}>
-                <a href="https://remotify.netlfiy.com"> Create </a> an account
+                <a href="https://remotify.netlify.com/register/services">
+                  {" "}
+                  Create{" "}
+                </a>{" "}
+                an account
               </Text>
             </div>
           </CardBody>
