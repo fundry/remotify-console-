@@ -8,8 +8,10 @@ import { observer, inject } from "mobx-react";
 import media from "styled-media-query";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useMutation } from "@apollo/react-hooks";
 
 import useWindowWidth from "../../hooks_style";
+import { LoginOrganization } from "../../data/mutations";
 
 const Login = (props): JSX.Element => {
   const Body = styled.div`
@@ -97,6 +99,19 @@ const Login = (props): JSX.Element => {
   const { AuthUser } = props.AuthStore;
   const hooks = useWindowWidth();
 
+  const [loginOrganization, { error, loading, data }] = useMutation(
+    LoginOrganization,
+    {
+      ignoreResults: false,
+      onCompleted: () => {
+        console.log(data);
+      },
+      onError: error => {
+        console.log(error, "an error ocurrred");
+      }
+    }
+  );
+
   const Title = styled.h2`
     ${media.lessThan("small")`
        font-size: 1.7em
@@ -176,27 +191,29 @@ const Login = (props): JSX.Element => {
             </div>
 
             {!Loading ? (
-              <div>
-                <form>
+              <Formik
+                initialValues={{ name: "", password: "" }}
+                validationSchema={validation}
+                onSubmit={(values, { setSubmitting }) => {}}
+              >
+                {({
+                  isSubmitting,
+                  handleChange,
+                  handleBlur,
+                  values,
+                  errors
+                }) => (
                   <div>
-                    <div style={{ paddingBottom: "5px", paddingLeft: "10px" }}>
-                      <Workspace>
-                        Workspace {!Name ? "Name" : "Password"}
-                      </Workspace>
-                    </div>
+                    <form>
+                      <div>
+                        <div
+                          style={{ paddingBottom: "5px", paddingLeft: "10px" }}
+                        >
+                          <Workspace>
+                            Workspace {!Name ? "Name" : "Password"}
+                          </Workspace>
+                        </div>
 
-                    <Formik
-                      initialValues={{ name: "", password: "" }}
-                      validationSchema={validation}
-                      onSubmit={(values, { setSubmitting }) => {}}
-                    >
-                      {({
-                        isSubmitting,
-                        handleChange,
-                        handleBlur,
-                        values,
-                        errors
-                      }) => (
                         <div>
                           {!Name ? (
                             <div>
@@ -244,34 +261,44 @@ const Login = (props): JSX.Element => {
                             </div>
                           )}
                         </div>
+                      </div>
+                    </form>
+                    <br />
+                    <div style={{ textAlign: !Name ? "right" : "center" }}>
+                      {!Name ? (
+                        <Button
+                          onClick={() => {
+                            checkUser();
+                          }}
+                        >
+                          <Flex>
+                            <p style={{ paddingRight: "5px" }}>Continue </p>
+                            <IoIosArrowRoundForward
+                              style={{ fontSize: "1.7em", color: "white" }}
+                            />{" "}
+                          </Flex>
+                        </Button>
+                      ) : (
+                        <Link to="/dashboard">
+                          <Button
+                            onClick={() =>
+                              loginOrganization({
+                                variables: {
+                                  name: values.name,
+                                  email: "helpdesk.remotif@gmail.com",
+                                  password: values.password
+                                }
+                              })
+                            }
+                          >
+                            <Flex>Login</Flex>
+                          </Button>{" "}
+                        </Link>
                       )}
-                    </Formik>
+                    </div>
                   </div>
-                </form>
-                <br />
-                <div style={{ textAlign: !Name ? "right" : "center" }}>
-                  {!Name ? (
-                    <Button
-                      onClick={() => {
-                        checkUser();
-                      }}
-                    >
-                      <Flex>
-                        <p style={{ paddingRight: "5px" }}>Continue </p>
-                        <IoIosArrowRoundForward
-                          style={{ fontSize: "1.7em", color: "white" }}
-                        />{" "}
-                      </Flex>
-                    </Button>
-                  ) : (
-                    <Link to="/dashboard">
-                      <Button>
-                        <Flex>Login</Flex>
-                      </Button>{" "}
-                    </Link>
-                  )}
-                </div>
-              </div>
+                )}
+              </Formik>
             ) : (
               <div style={{ padding: "2em" }}>
                 <br />
