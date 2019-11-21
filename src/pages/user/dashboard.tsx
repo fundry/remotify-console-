@@ -80,14 +80,6 @@ const Dashboard = (): JSX.Element => {
               <NavLink to="/profile">
                 <h3> Fundry </h3>
               </NavLink>
-
-              <a href="https://fundry.netlify.com"> Fundry.com </a>
-              <p> helpdesk.remotify@gmail.com </p>
-            </Flex>
-
-            <Flex column>
-              <h4> 205 workers </h4>
-              <p> 13 departments </p>
             </Flex>
           </Flex>
         </Details>

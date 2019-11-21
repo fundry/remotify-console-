@@ -2,12 +2,19 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import Flex from "styled-flex-component";
 import { useMutation } from "@apollo/react-hooks";
-
+import media from "styled-media-query";
 import { MdShowChart } from "react-icons/md";
+import { FiUser } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 import { CreateTeam } from "../data/mutations";
+import useWindowWidth from "../hooks_style";
 
-const Header = (): JSX.Element => {
+interface CustomProps {
+  DoubleHeader: Boolean;
+}
+
+const Header = ({ DoubleHeader }: CustomProps): JSX.Element => {
   const Head = styled.div({
     padding: "0.5em",
     width: "100%",
@@ -29,6 +36,10 @@ const Header = (): JSX.Element => {
       color: #fff;
       background: transparent;
     }
+    ${media.lessThan("small")`
+    padding: 0.15em 1em;
+    margin: 0 0.25em;
+    `};
   `;
 
   const Hover = styled.div({
@@ -47,21 +58,39 @@ const Header = (): JSX.Element => {
     padding-top: 0em;
   `;
 
-  const NavLinks = styled.ul`
-    list-style: none;
-    padding: 0;
-    color: #000;
-  `;
-
-  const Link = styled.li`
-    display: block;
-    padding: 0.8em;
-    color: black;
-    text-decoration: none;
-  `;
-
   const Profile = styled.div`
     padding: 1em;
+  `;
+
+  const Input = styled.input`
+    background: transparent
+    color: #fff
+    border: 0.7px solid white
+    padding: 0.5em
+    padding-left: "2em
+    width: 20em
+    ${media.lessThan("small")`
+     width : 18em
+  `};
+  `;
+
+  const Header = styled.div`
+    padding-left: 1em
+    padding-right: 1em
+    padding: 0.5em
+    width: 100%
+    background: #361f94
+    color: white
+  `;
+
+  const OrgName = styled.h3`
+    ${media.lessThan("medium")`
+     font-size : 1.6em
+    `};
+    ${media.lessThan("small")`
+    font-weight : normal
+     width : 1.2em
+    `};
   `;
 
   const [Create, setCreate] = useState<Boolean>(false);
@@ -76,9 +105,23 @@ const Header = (): JSX.Element => {
 
   const refDepartment = useRef<HTMLInputElement>(null);
 
+  const hooks = useWindowWidth();
+
   return (
     <div>
-      <div>
+      <Header>
+        <Flex justifyBetween>
+          <OrgName>
+            {" "}
+            <a href="https://remotify.netlify.com"> R </a>{" "}
+          </OrgName>
+
+          <Link to="/profile">
+            <FiUser style={{ fontSize: "2em" }} />
+          </Link>
+        </Flex>
+      </Header>
+      {DoubleHeader ? (
         <Head
           style={{
             boxShadow: "0px 3px 5px grey"
@@ -92,18 +135,7 @@ const Header = (): JSX.Element => {
             ) : (
               <div>
                 <Flex>
-                  <input
-                    style={{
-                      background: "transparent",
-                      color: "white",
-                      border: "0.7px solid white ",
-                      padding: "0.5em",
-                      paddingLeft: "2em",
-                      width: "20em"
-                    }}
-                    ref={refDepartment}
-                    placeholder="Department Name"
-                  />
+                  <Input ref={refDepartment} placeholder="Department Name" />
 
                   <Button
                     onClick={() => {
@@ -121,31 +153,33 @@ const Header = (): JSX.Element => {
               </div>
             )}
 
-            <p> Departments / Profile </p>
+            {hooks >= 450 ? <p> Departments / Profile </p> : null}
 
-            <div>
-              {!Chart ? (
-                <Hover
-                  onClick={() => {
-                    setChart(true);
-                  }}
-                >
-                  <MdShowChart style={{ fontSize: "2em" }} />
-                </Hover>
-              ) : (
-                <Hover
-                  onClick={() => {
-                    setChart(false);
-                  }}
-                >
-                  <p> Board View </p>
-                </Hover>
-              )}
-            </div>
-          </Flex>
+            {!Create ? (
+              <div>
+                {!Chart ? (
+                  <Hover
+                    onClick={() => {
+                      setChart(true);
+                    }}
+                  >
+                    <MdShowChart style={{ fontSize: "2em" }} />
+                  </Hover>
+                ) : (
+                  <Hover
+                    onClick={() => {
+                      setChart(false);
+                    }}
+                  >
+                    <p> Board View </p>
+                  </Hover>
+                )}
+              </div>
+            ) : null}
+          </Flex>{" "}
+          <br />
         </Head>
-        <br />
-      </div>
+      ) : null}
     </div>
   );
 };

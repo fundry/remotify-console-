@@ -1,4 +1,4 @@
-import { observable, decorate, action } from 'mobx';
+import { observable, decorate, action } from "mobx";
 // import { create, persist } from 'mobx-persist';
 //
 // const hydrate = create({
@@ -7,7 +7,7 @@ import { observable, decorate, action } from 'mobx';
 // });
 
 class AuthStore {
-  authenticated = false;
+  authenticated = true;
 
   openWelcomeModal = () => {
     this.welcomed = true;
@@ -30,12 +30,12 @@ class AuthStore {
 
 const DecoratedAuthStore = decorate(AuthStore, {
   //observables
-  authenticated:  observable,
+  authenticated: observable,
   welcomed: observable,
 
   //actions
   AuthUser: action,
-  UnAuthUser: action,
+  UnAuthUser: action
 });
 
 const store = new DecoratedAuthStore();
