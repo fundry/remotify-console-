@@ -16,6 +16,12 @@ const Routes = (props): JSX.Element => {
         <Route path="/login" component={Login} />
 
         <Protected
+          path="/"
+          authenticated={authenticated}
+          component={Dashboard}
+        />
+
+        <Protected
           path="/dashboard"
           authenticated={authenticated}
           component={Dashboard}
