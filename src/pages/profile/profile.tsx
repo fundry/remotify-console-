@@ -2,11 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import Flex from "styled-flex-component";
 import { Image, Tab, Tabs } from "react-bootstrap";
-// import { MdHistory } from 'react-icons/md';
 
 import { Header } from "../../components/";
 import ProfileInfo from "./profileInfo";
-
 import Activity from "./activity";
 import Billing from "./billing";
 

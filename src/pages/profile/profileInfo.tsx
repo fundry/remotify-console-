@@ -5,6 +5,7 @@ import { Image, Tab, Tabs, Modal } from "react-bootstrap";
 import { MdHistory } from "react-icons/md";
 import { IoMdPersonAdd, IoMdCopy } from "react-icons/io";
 import media from "styled-media-query";
+import { Link } from "react-router-dom";
 
 const List: Array<Object> = [{ name: "" }, { name: "" }, { name: "" }];
 
@@ -48,11 +49,11 @@ const ProfileInfo = (): JSX.Element => {
     border : 1.5px solid #000
     border-radius : 2px
     padding : 0.5em
-    width :  30em
+    width :  32em
   `;
 
   const InviteTextField = styled.input`
-    width : 30em
+    width : 32em
     border : 1px solid #000
     border-radius : 5px
     padding-left : 10px
@@ -60,20 +61,21 @@ const ProfileInfo = (): JSX.Element => {
   `;
 
   const Label = styled.p`
-    padding-left : 40px
+    padding-left : 30px
     font-size : 1.1em
     font-weight : bold
   `;
 
-  const [Invite, SetInvite] = useState<Boolean>(false);
+  const [Invite, SetInvite] = useState<boolean>(false);
 
   return (
     <Body>
       <Modal
-        show={true}
+        show={Invite}
         onHide={() => {
           SetInvite(false);
         }}
+        style={{ marginTop: "10%" }}
       >
         <ModalBody>
           <Label> Paste Invitation Link </Label>
@@ -81,16 +83,15 @@ const ProfileInfo = (): JSX.Element => {
             <InviteBox>
               <Flex justifyBetween>
                 <code style={{ fontSize: "1em" }}>
-                  {" "}
                   remmkvfgrgrhgrgefefifgigrgmkvfgrgrhgrgefefifgigrgjhjh{" "}
                 </code>
                 <Hover style={{ paddingLeft: "5px" }}>
-                  {" "}
                   <IoMdCopy style={{ fontSize: "2em" }} />{" "}
                 </Hover>
               </Flex>
             </InviteBox>
           </Flex>
+
           <br />
 
           <Label> Send Invitation Link By Mail </Label>
@@ -127,10 +128,17 @@ const ProfileInfo = (): JSX.Element => {
 
         <div style={{ paddingRight: "10px" }}>
           <Flex column>
-            <h4> 35 workers </h4>
-            <h4> 12 Departments </h4>
+            <Link to="/members">
+              <h4 style={{ textAlign: "right" }}>35 workers </h4>
+              <h4> 12 Departments </h4>
+            </Link>
 
-            <Hover style={{ textAlign: "right" }}>
+            <Hover
+              style={{ textAlign: "right" }}
+              onClick={() => {
+                SetInvite(true);
+              }}
+            >
               <IoMdPersonAdd style={{ fontSize: "2em" }} />
             </Hover>
           </Flex>

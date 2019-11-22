@@ -7,7 +7,7 @@ import { MdShowChart } from "react-icons/md";
 
 import Charts from "./chart";
 import { Header } from "../../components/";
-import Department from "./details/departments";
+import Department from "../members/departments";
 
 const Dashboard = (): JSX.Element => {
   const Button = styled.button`
@@ -71,7 +71,7 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <div>
-      <Header />
+      <Header DoubleHeader={true} />
 
       <div>
         <Details>

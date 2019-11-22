@@ -19,6 +19,7 @@ const Header = ({ DoubleHeader }: CustomProps): JSX.Element => {
     padding: "0.5em",
     width: "100%",
     background: "#361f94",
+    paddingTop: "15px",
     color: "white"
   });
 
@@ -79,7 +80,7 @@ const Header = ({ DoubleHeader }: CustomProps): JSX.Element => {
     padding-right: 1em
     padding: 0.5em
     width: 100%
-    background: #361f94
+    background: #6C29D9
     color: white
   `;
 
@@ -109,7 +110,7 @@ const Header = ({ DoubleHeader }: CustomProps): JSX.Element => {
 
   return (
     <div>
-      <Header>
+      <Header style={{ boxShadow: !DoubleHeader ? "0px 3px 5px grey" : "0px" }}>
         <Flex justifyBetween>
           <OrgName>
             {" "}
