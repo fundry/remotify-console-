@@ -5,9 +5,10 @@ import posed from "react-pose";
 import { FiX } from "react-icons/fi";
 import { useQuery } from "@apollo/react-hooks";
 import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
 // import { FetchDepartment } from '../../../data/queries';
-import DepartmentModal from "./departmentModal";
 
 const autoGrid = (minColumnWidth = 200, gridGap = 0) => ({
   display: "grid",
@@ -63,69 +64,36 @@ const Hover = styled.div({
   cursor: "pointer"
 });
 
-const Department = () => {
+const Department = props => {
   const [teamModal, setteamModal] = useState(false);
   const [Error, setError] = useState(false);
 
   // const [department] = useQuery(FetchDepartment);
 
   const data = [
-    { name: "wane" },
-    { name: "tane" },
-    { name: "cane" },
-    { name: "wane" },
-    { name: "tane" },
-    { name: "cane" }
+    { i: 1, name: "wane" },
+    { i: 2, name: "tane" },
+    { i: 3, name: "cane" },
+    { i: 4, name: "wane" },
+    { i: 5, name: "tane" },
+    { i: 6, name: "cane" }
   ];
+
+  console.log(props);
 
   return (
     <div>
-      <Modal
-        show={teamModal}
-        onhide={() => {
-          setteamModal(false);
-        }}
-        style={{
-          boxShadow: "0px 4px 6px grey"
-        }}
-      >
-        <ModalHead>
-          <Flex justifyBetween>
-            <p> . </p>
-
-            <p style={{ fontSize: "1.2em" }}>FrontEnd Department </p>
-
-            <Hover
-              onClick={() => {
-                setteamModal(false);
-              }}
-            >
-              <FiX />
-            </Hover>
-          </Flex>
-        </ModalHead>
-
-        <ModalBody>
-          <DepartmentModal />
-        </ModalBody>
-      </Modal>
-
       <Cards>
         {data.map(({ i, name }) => {
           return (
-            <Bounce
-              onClick={() => {
-                setteamModal(true);
-              }}
-              key={i}
-            >
-              <Card>
+            <Link to={`/members/${i}`}>
+              <Card key={i}>
                 <div style={{ textAlign: "center" }}>
                   <h5> {name}</h5>
                   <p> 5 members </p>
                 </div>
               </Card>
-            </Bounce>
+            </Link>
           );
         })}
       </Cards>
@@ -134,4 +102,4 @@ const Department = () => {
   );
 };
 
-export default Department;
+export default inject("DepartmentStore")(observer(Department));

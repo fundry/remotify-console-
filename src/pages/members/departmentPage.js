@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Flex from "styled-flex-component";
-import { Image } from "react-bootstrap";
+import { Image, Modal } from "react-bootstrap";
 import posed from "react-pose";
+import { inject, observer } from "mobx-react";
 
-const Department = () => {
+import Team from "./Team";
+import { Header } from "../../components/";
+
+const DepartmentPage = props => {
   const Button = styled.button`
     background: #fff;
     text-align: right;
@@ -64,31 +68,48 @@ const Department = () => {
   ];
 
   const Detail = styled.p({ textAlign: "center", fontSize: "1.2em" });
+  const [TeamModal, setTeamModal] = useState(false);
+
+  const { showTeam, openTeam, closeTeam } = props.DepartmentStore;
 
   return (
-    <Body>
-      <Detail> Fundry Engineering arm responsible for development. </Detail>
+    <div>
+      <Header />
 
-      <Images>
-        {Data.map(({ i }) => {
-          return (
-            <div>
-              <Bounce key={i}>
-                <Image
-                  src={require("./sample.png")}
-                  style={{ height: "60px" }}
-                  roundedCircle
-                />
-              </Bounce>
-            </div>
-          );
-        })}
-      </Images>
-      <hr />
+      <Body>
+        <Team show={showTeam} close={closeTeam} />
 
-      <h1> user details </h1>
-    </Body>
+        <Detail> Fundry Engineering arm responsible for development. </Detail>
+
+        <Images>
+          {Data.map(({ i }) => {
+            return (
+              <div>
+                <Bounce key={i}>
+                  <Image
+                    src={require("./sample.png")}
+                    style={{ height: "60px" }}
+                    roundedCircle
+                  />
+                </Bounce>
+              </div>
+            );
+          })}
+        </Images>
+        <hr />
+
+        <div>
+          <button
+            onClick={() => {
+              openTeam();
+            }}
+          >
+            Team 1
+          </button>
+        </div>
+      </Body>
+    </div>
   );
 };
 
-export default Department;
+export default inject("DepartmentStore")(observer(DepartmentPage));
