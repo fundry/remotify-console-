@@ -14,9 +14,9 @@ interface CustomProps {
   DoubleHeader: Boolean;
 }
 
-const Header = ({ DoubleHeader }: CustomProps): JSX.Element => {
+const Header = (props, { DoubleHeader }: CustomProps): JSX.Element => {
   const Head = styled.div({
-    padding: "0.5em",
+    paddingRight: "10px",
     width: "100%",
     background: "#361f94",
     paddingTop: "15px",
@@ -36,10 +36,11 @@ const Header = ({ DoubleHeader }: CustomProps): JSX.Element => {
     &:hover {
       color: #fff;
       background: transparent;
+      border: 1px solid #fff;
     }
     ${media.lessThan("small")`
-    padding: 0.15em 1em;
-    margin: 0 0.25em;
+      padding: 0.15em 1em;
+      margin: 0 0.25em;
     `};
   `;
 
@@ -74,7 +75,6 @@ const Header = ({ DoubleHeader }: CustomProps): JSX.Element => {
      width : 18em
   `};
   `;
-
   const Header = styled.div`
     padding-left: 1em
     padding-right: 1em
@@ -113,9 +113,10 @@ const Header = ({ DoubleHeader }: CustomProps): JSX.Element => {
       <Header style={{ boxShadow: !DoubleHeader ? "0px 3px 5px grey" : "0px" }}>
         <Flex justifyBetween>
           <OrgName>
-            {" "}
-            <a href="https://remotify.netlify.com"> R </a>{" "}
+            <Link to="/dashboard"> R </Link>
           </OrgName>
+
+          <h5 style={{ paddingTop: "5px" }}>{props.name}</h5>
 
           <Link to="/profile">
             <FiUser style={{ fontSize: "2em" }} />

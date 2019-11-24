@@ -74,7 +74,7 @@ const DepartmentPage = props => {
 
   return (
     <div>
-      <Header />
+      <Header name="Department | Engineering" />
 
       <Body>
         <Team show={showTeam} close={closeTeam} />
@@ -98,15 +98,23 @@ const DepartmentPage = props => {
         </Images>
         <hr />
 
-        <div>
-          <button
+        <Flex>
+          <Button
             onClick={() => {
               openTeam();
             }}
           >
-            Team 1
-          </button>
-        </div>
+            FrontEnd Team
+          </Button>
+
+          <Button
+            onClick={() => {
+              openTeam();
+            }}
+          >
+            Backend Team
+          </Button>
+        </Flex>
       </Body>
     </div>
   );

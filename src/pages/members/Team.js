@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Flex from "styled-flex-component";
 import { Image, Modal } from "react-bootstrap";
 import posed from "react-pose";
+import { FiX } from "react-icons/fi";
 
 const Team = props => {
   const Button = styled.button`
@@ -55,6 +56,16 @@ const Team = props => {
     }
   });
 
+  const Head = styled.div`
+    padding: 0.5em;
+    background : grey
+    color : #fff
+  `;
+
+  const Hover = styled.div`
+    cursor: pointer;
+  `;
+
   const Data = [
     { name: "" },
     { name: "" },
@@ -74,6 +85,28 @@ const Team = props => {
         close();
       }}
     >
+      <Head>
+        <Flex justifyBetween>
+          <Flex>
+            <Image
+              src={require("./sample.png")}
+              style={{ height: "30px", paddingRight: "10px" }}
+            />
+          </Flex>
+
+          <h5> FrontEnd Team </h5>
+
+          <Hover style={{ textAlign: "right" }}>
+            <FiX
+              style={{ fontSize: "1.7em" }}
+              onClick={() => {
+                close();
+              }}
+            />
+          </Hover>
+        </Flex>
+      </Head>
+
       <Body>
         <Detail> Fundry Engineering arm responsible for development. </Detail>
 
@@ -84,7 +117,7 @@ const Team = props => {
                 <Bounce key={i}>
                   <Image
                     src={require("./sample.png")}
-                    style={{ height: "60px" }}
+                    style={{ height: "40px" }}
                     roundedCircle
                   />
                 </Bounce>
@@ -92,9 +125,23 @@ const Team = props => {
             );
           })}
         </Images>
-        <hr />
 
-        <h1> user details </h1>
+        <br />
+        <br />
+
+        <div>
+          <h5 style={{ fontWeight: "bold", paddingLeft: "15px" }}> Tasks </h5>
+          <br />
+          <br />
+          <br />
+        </div>
+
+        <div>
+          <h5 style={{ fontWeight: "bold", paddingLeft: "15px" }}> Forms </h5>
+          <br />
+          <br />
+          <br />
+        </div>
       </Body>
     </Modal>
   );

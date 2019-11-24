@@ -9,7 +9,7 @@ import Charts from "./chart";
 import { Header } from "../../components/";
 import Department from "../members/departments";
 
-const Dashboard = (): JSX.Element => {
+const Dashboard = (props): JSX.Element => {
   const Button = styled.button`
     background: #fff;
     text-align: right;
@@ -71,7 +71,7 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <div>
-      <Header DoubleHeader={true} />
+      <Header DoubleHeader={true} name="Dashboard" />
 
       <div>
         <Details>
