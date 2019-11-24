@@ -116,7 +116,9 @@ const Header = (props, { DoubleHeader }: CustomProps): JSX.Element => {
             <Link to="/dashboard"> R </Link>
           </OrgName>
 
-          <h5 style={{ paddingTop: "5px" }}>{props.name}</h5>
+          <h5 style={{ wordSpacing: "0.5em", paddingTop: "5px" }}>
+            {props.name}
+          </h5>
 
           <Link to="/profile">
             <FiUser style={{ fontSize: "2em" }} />

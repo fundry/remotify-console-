@@ -20,7 +20,7 @@ const profile = (): JSX.Element => {
 
   return (
     <div>
-      <Header DoubleHeader={false} name="Profile" />
+      <Header DoubleHeader={false} name="Profile | Fundry" />
 
       <Body>
         <ProfileInfo />
