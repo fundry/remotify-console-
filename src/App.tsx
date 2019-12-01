@@ -4,12 +4,16 @@ import { Provider } from "mobx-react";
 
 import config from "./data/config";
 import Route from "./pages/routes";
-import { AuthStore, DepartmentStore } from "./state/";
+import { AuthStore, DepartmentStore, MagicAuth } from "./state/";
 
 //all routes will come here
 function App(): JSX.Element {
   return (
-    <Provider AuthStore={AuthStore} DepartmentStore={DepartmentStore}>
+    <Provider
+      AuthStore={AuthStore}
+      MagicAuth={MagicAuth}
+      DepartmentStore={DepartmentStore}
+    >
       <ApolloProvider client={config}>
         <Route />
       </ApolloProvider>
