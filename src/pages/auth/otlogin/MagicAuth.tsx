@@ -101,7 +101,7 @@ const MagicAuth = (props): JSX.Element => {
                   <Image
                     fluid
                     src={require("../../../images/lawyer.png")}
-                    style={{ height: "70px" }}
+                    style={{ height: "65px" }}
                     roundedCircle
                   />{" "}
                   <Org style={{ paddingLeft: "10px", paddingTop: "15px" }}>
@@ -118,7 +118,7 @@ const MagicAuth = (props): JSX.Element => {
                       <Image
                         fluid
                         src={require("../../../images/lawyer.png")}
-                        style={{ height: "90px" }}
+                        style={{ height: "70px" }}
                         roundedCircle
                       />{" "}
                     </Flex>
@@ -129,7 +129,7 @@ const MagicAuth = (props): JSX.Element => {
               </div>
             )}
             <Flex justifyCenter>
-              <Planet mood="excited" size="12em" />
+              <Planet mood="excited" size="10em" />
             </Flex>
             <br />{" "}
             {!accepted ? (
