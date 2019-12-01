@@ -4,7 +4,9 @@ import Flex from "styled-flex-component";
 import { Card, Image, Spinner } from "react-bootstrap";
 import media from "styled-media-query";
 import { inject, observer } from "mobx-react";
+import { Planet } from "react-kawaii";
 
+import useWindowWidth from "../../../hooks_style";
 import Form from "./MagicAuthForm";
 import Invite from "./invite";
 
@@ -43,7 +45,7 @@ const CardHeadText = styled.h4`
     `};
 `;
 
-const Org = styled.h4`
+const Org = styled.h5`
     font-weight: normal
     text-align: center
     ${media.lessThan("small")`
@@ -56,7 +58,15 @@ const MagicAuth = (props): JSX.Element => {
     padding: 0.5em;
   `;
 
-  const { accepted, declined, acceptInvite, declineInvite } = props.MagicAuth;
+  const {
+    accepted,
+    declined,
+    AuthUser,
+    acceptInvite,
+    declineInvite
+  } = props.MagicAuth;
+
+  const hooks = useWindowWidth();
 
   return (
     <Body>
@@ -81,28 +91,47 @@ const MagicAuth = (props): JSX.Element => {
           }}
         >
           <CardHead>
-            <h4> {!accepted ? " Accept Invitation" : "Setup Passcode"}</h4>
+            <h4> {!accepted ? "Accept Invitation" : "Setup Passcode"}</h4>
           </CardHead>
 
           <CardBody style={{ padding: "1em" }}>
-            <div>
-              <Flex justifyCenter>
-                <div>
-                  <Flex justifyCenter>
+            {hooks >= 550 ? (
+              <div style={{ textAlign: "left" }}>
+                <Flex>
+                  <Image
+                    fluid
+                    src={require("../../../images/lawyer.png")}
+                    style={{ height: "70px" }}
+                    roundedCircle
+                  />{" "}
+                  <Org style={{ paddingLeft: "10px", paddingTop: "15px" }}>
                     {" "}
-                    <Image
-                      fluid
-                      src={require("../../../images/lawyer.png")}
-                      style={{ height: "110px" }}
-                      roundedCircle
-                    />{" "}
-                  </Flex>
-                  <Org> Fundry Organization </Org>
-                  <br />{" "}
-                </div>
-              </Flex>
-            </div>
-
+                    Fundry Organization{" "}
+                  </Org>
+                </Flex>
+              </div>
+            ) : (
+              <div>
+                <Flex justifyCenter>
+                  <div>
+                    <Flex justifyCenter>
+                      <Image
+                        fluid
+                        src={require("../../../images/lawyer.png")}
+                        style={{ height: "90px" }}
+                        roundedCircle
+                      />{" "}
+                    </Flex>
+                    <Org> Fundry Organization </Org>
+                    <br />{" "}
+                  </div>
+                </Flex>
+              </div>
+            )}
+            <Flex justifyCenter>
+              <Planet mood="excited" size="12em" />
+            </Flex>
+            <br />{" "}
             {!accepted ? (
               <Invite
                 declined={declined}
@@ -111,24 +140,8 @@ const MagicAuth = (props): JSX.Element => {
                 acceptFunc={acceptInvite}
               />
             ) : (
-              <Form />
+              <Form AuthUser={AuthUser} />
             )}
-
-            {/*
-                  <div style={{ padding: "2em" }}>
-                <br />
-                <Flex justifyCenter>
-                  <Spinner animation="grow" variant="primary" />
-                  <Spinner animation="grow" variant="secondary" />
-                  <Spinner animation="grow" variant="success" />
-                  <Spinner animation="grow" variant="danger" />
-                  <Spinner animation="grow" variant="warning" />
-                  <Spinner animation="grow" variant="info" />
-                  <Spinner animation="grow" variant="light" />
-                </Flex>
-                <br />
-              </div>
-*/}
           </CardBody>
         </Card>
       </Flex>

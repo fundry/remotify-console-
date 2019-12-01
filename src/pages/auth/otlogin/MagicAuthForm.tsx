@@ -39,7 +39,11 @@ const Button = styled.button`
   }
 `;
 
-const MagicAuthForm = (): JSX.Element => {
+interface CustomProps {
+  AuthUser: any;
+}
+
+const MagicAuthForm = ({ AuthUser }: CustomProps): JSX.Element => {
   const [Accept, setAccept] = useState<boolean>(false);
 
   const NameInput = useRef<HTMLInputElement>();
@@ -109,7 +113,14 @@ const MagicAuthForm = (): JSX.Element => {
           <br />
 
           <Flex justifyCenter>
-            <Button> Set Passcode </Button>
+            <Button
+              onClick={() => {
+                AuthUser();
+              }}
+            >
+              {" "}
+              Set Passcode{" "}
+            </Button>
           </Flex>
         </form>
       )}

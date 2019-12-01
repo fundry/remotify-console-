@@ -3,6 +3,7 @@ import styled from "styled-components";
 import media from "styled-media-query";
 import { IoIosArrowRoundForward, IoIosWarning } from "react-icons/io";
 import Flex from "styled-flex-component";
+import { Planet } from "react-kawaii";
 
 interface CustomProps {
   accepted: boolean;
@@ -50,7 +51,7 @@ const Invite = ({
           <div>
             <Text>
               You have been invited to work with the <b>Fundry Organization </b>{" "}
-              as <b> FrontEnd Engineer </b>{" "}
+              as a <b> FrontEnd Engineer </b>{" "}
             </Text>
 
             <Flex justifyCenter>
@@ -66,13 +67,13 @@ const Invite = ({
                   declineFunc();
                 }}
               >
-                {" "}
                 Decline Invitation{" "}
               </Button>
             </Flex>
           </div>
         ) : (
           <div>
+            <Planet mood="sad" size="15" />
             <p> You rejected </p>
           </div>
         )}
