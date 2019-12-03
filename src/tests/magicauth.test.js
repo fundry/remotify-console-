@@ -1,8 +1,13 @@
-// const n = 1;
-// const bool = true;
+token = 184765547850656;
 
-// describe("test n ", () => {
-//   it("n", () => {
-//     expect(bool).toEqual(true);
-//   });
-// });
+var string = `https://remotify.netlify/?token=${token}`;
+var j = string.match(/\d+/g);
+
+m = j.join();
+n = parseInt(m);
+
+describe("it check  if extracted val is int", () => {
+  it("asserts val", () => {
+    expect(n).toBe(token);
+  });
+});
