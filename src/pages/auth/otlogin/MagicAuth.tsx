@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Flex from "styled-flex-component";
 import { Card, Image, Spinner } from "react-bootstrap";
@@ -68,6 +68,17 @@ const MagicAuth = (props): JSX.Element => {
 
   const hooks = useWindowWidth();
 
+  console.log(window.location.href, "location win");
+
+  const [Token, setToken] = useState(null);
+
+  // extract d token from the link using window obj ...
+  useEffect(() => {
+    setToken(window.location.href);
+
+    // window.location.replace('http://localhost:3000/auth')
+  }, []);
+
   return (
     <Body>
       <br />
@@ -83,7 +94,7 @@ const MagicAuth = (props): JSX.Element => {
           Please accept and setup your credentials for your invitation
         </Text>
       </Heading>
-
+      <h4> {Token} </h4>
       <Flex justifyCenter>
         <Card
           style={{
@@ -129,7 +140,11 @@ const MagicAuth = (props): JSX.Element => {
               </div>
             )}
             <Flex justifyCenter>
-              <Planet mood="excited" size="10em" />
+              {!declined ? (
+                <Planet mood="excited" size="10em" />
+              ) : (
+                <Planet mood="shocked" size="10em" />
+              )}
             </Flex>
             <br />{" "}
             {!accepted ? (
