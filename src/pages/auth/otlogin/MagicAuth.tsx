@@ -63,103 +63,141 @@ const MagicAuth = (props): JSX.Element => {
     declined,
     AuthUser,
     acceptInvite,
-    declineInvite
+    declineInvite,
+    extractToken,
+    checkedToken,
+    expiredToken
   } = props.MagicAuth;
 
   const hooks = useWindowWidth();
 
   console.log(window.location.href, "location win");
 
-  const [Token, setToken] = useState(null);
+  const [Token, setToken] = useState<boolean>(null);
+  const [check, setCheck] = useState<boolean>(true);
+  const [mood, setMood] = useState<string>("shocked");
 
   // extract d token from the link using window obj ...
   useEffect(() => {
-    setToken(window.location.href);
-
-    // window.location.replace('http://localhost:3000/auth')
+    const url = window.location.href;
+    extractToken(url);
   }, []);
 
+  // controlling react-kawaii svg
+  if (expiredToken) {
+    setTimeout(() => {
+      setMood("sad");
+    }, 2000);
+  }
+
+  if (declined) {
+    setTimeout(() => {
+      setMood("sad");
+    }, 1200);
+  }
+  // =============================
   return (
     <Body>
       <br />
       <br />
       <br />
 
-      <Heading>
-        <Title>
-          {" "}
-          <a href="https://remotify.netlify.com"> Remotify </a>{" "}
-        </Title>
-        <Text>
-          Please accept and setup your credentials for your invitation
-        </Text>
-      </Heading>
-      <h4> {Token} </h4>
-      <Flex justifyCenter>
-        <Card
-          style={{
-            boxShadow: "0px 5px 7px grey"
-          }}
-        >
-          <CardHead>
-            <h4> {!accepted ? "Accept Invitation" : "Setup Passcode"}</h4>
-          </CardHead>
+      {expiredToken ? (
+        <div>
+          <Flex justifyCenter>
+            <div>
+              <Planet mood={mood} size="10em" />
+              <p style={{ fontSize: "1.2em" }}> Seems your token is expired </p>
+            </div>
+          </Flex>
+        </div>
+      ) : (
+        <div>
+          {!checkedToken ? (
+            <p> checking token </p>
+          ) : (
+            <div>
+              <Heading>
+                <Title>
+                  {" "}
+                  <a href="https://remotify.netlify.com"> Remotify </a>{" "}
+                </Title>
+              </Heading>
+              <h4> {Token} </h4>
+              <Flex justifyCenter>
+                <Card
+                  style={{
+                    boxShadow: "0px 5px 7px grey"
+                  }}
+                >
+                  <CardHead>
+                    <h4>
+                      {" "}
+                      {!accepted ? "Accept Invitation" : "Setup Passcode"}
+                    </h4>
+                  </CardHead>
 
-          <CardBody style={{ padding: "1em" }}>
-            {hooks >= 550 ? (
-              <div style={{ textAlign: "left" }}>
-                <Flex>
-                  <Image
-                    fluid
-                    src={require("../../../images/lawyer.png")}
-                    style={{ height: "65px" }}
-                    roundedCircle
-                  />{" "}
-                  <Org style={{ paddingLeft: "10px", paddingTop: "15px" }}>
-                    {" "}
-                    Fundry Organization{" "}
-                  </Org>
-                </Flex>
-              </div>
-            ) : (
-              <div>
-                <Flex justifyCenter>
-                  <div>
+                  <CardBody style={{ padding: "1em" }}>
+                    {hooks >= 550 ? (
+                      <div style={{ textAlign: "left" }}>
+                        <Flex>
+                          <Image
+                            fluid
+                            src={require("../../../images/lawyer.png")}
+                            style={{ height: "65px" }}
+                            roundedCircle
+                          />{" "}
+                          <Org
+                            style={{ paddingLeft: "10px", paddingTop: "15px" }}
+                          >
+                            {" "}
+                            Fundry Organization{" "}
+                          </Org>
+                        </Flex>
+                      </div>
+                    ) : (
+                      <div>
+                        <Flex justifyCenter>
+                          <div>
+                            <Flex justifyCenter>
+                              <Image
+                                fluid
+                                src={require("../../../images/lawyer.png")}
+                                style={{ height: "70px" }}
+                                roundedCircle
+                              />{" "}
+                            </Flex>
+                            <Org> Fundry Organization </Org>
+                            <br />{" "}
+                          </div>
+                        </Flex>
+                      </div>
+                    )}
                     <Flex justifyCenter>
-                      <Image
-                        fluid
-                        src={require("../../../images/lawyer.png")}
-                        style={{ height: "70px" }}
-                        roundedCircle
-                      />{" "}
+                      {!declined ? (
+                        <Planet mood="excited" size="10em" />
+                      ) : (
+                        <Planet mood={mood} size="10em" />
+                      )}
                     </Flex>
-                    <Org> Fundry Organization </Org>
                     <br />{" "}
-                  </div>
-                </Flex>
-              </div>
-            )}
-            <Flex justifyCenter>
-              {!declined ? (
-                <Planet mood="excited" size="10em" />
-              ) : (
-                <Planet mood="shocked" size="10em" />
-              )}
-            </Flex>
-            <br />{" "}
-            {!accepted ? (
-              <Invite
-                declined={declined}
-                declineFunc={declineInvite}
-                accepted={accepted}
-                acceptFunc={acceptInvite}
-              />
-            ) : (
-              <Form AuthUser={AuthUser} />
-            )}
-          </CardBody>
-        </Card>
-      </Flex>
+                    {!accepted ? (
+                      <Invite
+                        declined={declined}
+                        declineFunc={declineInvite}
+                        accepted={accepted}
+                        acceptFunc={acceptInvite}
+                      />
+                    ) : (
+                      <Form AuthUser={AuthUser} />
+                    )}
+                  </CardBody>
+                </Card>
+              </Flex>
+            </div>
+          )}
+        </div>
+      )}
     </Body>
   );
 };
