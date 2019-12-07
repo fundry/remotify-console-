@@ -30,7 +30,7 @@ const Login = (props): JSX.Element => {
   `;
 
   const Input = styled.input`
-  height : 6vh
+  height : 7vh
   width : 25em
   padding-left : 10px
   border: 1.1px solid #361f94

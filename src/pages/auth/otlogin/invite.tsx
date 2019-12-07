@@ -3,6 +3,7 @@ import styled from "styled-components";
 import media from "styled-media-query";
 import { IoIosArrowRoundForward, IoIosWarning } from "react-icons/io";
 import Flex from "styled-flex-component";
+import { Planet } from "react-kawaii";
 
 interface CustomProps {
   accepted: boolean;
@@ -43,8 +44,27 @@ const Invite = ({
     }
   `;
 
+  const [mood, setMood] = useState<string>("shocked");
+
+  // controlling react-kawaii svg
+
+  if (declined) {
+    setTimeout(() => {
+      setMood("sad");
+    }, 1200);
+  }
+  // =============================
+
   return (
     <Body>
+      <Flex justifyCenter>
+        {!declined ? (
+          <Planet mood="excited" size="10em" />
+        ) : (
+          <Planet mood={mood} size="10em" />
+        )}
+      </Flex>
+      <br />
       <Flex justifyCenter>
         {!declined ? (
           <div>

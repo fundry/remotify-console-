@@ -110,6 +110,7 @@ const MagicAuth = (props): JSX.Element => {
               <p style={{ fontSize: "1.2em" }}> Seems your token is expired </p>
             </div>
           </Flex>
+          <br />
         </div>
       ) : (
         <div>
@@ -173,14 +174,8 @@ const MagicAuth = (props): JSX.Element => {
                         </Flex>
                       </div>
                     )}
-                    <Flex justifyCenter>
-                      {!declined ? (
-                        <Planet mood="excited" size="10em" />
-                      ) : (
-                        <Planet mood={mood} size="10em" />
-                      )}
-                    </Flex>
-                    <br />{" "}
+
+                    <br />
                     {!accepted ? (
                       <Invite
                         declined={declined}

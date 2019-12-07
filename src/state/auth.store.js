@@ -7,7 +7,7 @@ import { observable, decorate, action } from "mobx";
 // });
 
 class AuthStore {
-  authenticated = true;
+  authenticated = false;
 
   openWelcomeModal = () => {
     this.welcomed = true;

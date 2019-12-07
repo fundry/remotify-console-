@@ -8,6 +8,7 @@ class MagicAuth {
   expiredToken = false;
 
   // validate and checks if token is expired
+  // token is mocked for now
   validateToken = token => {
     if (token == 3000) {
       this.checkedToken = true;

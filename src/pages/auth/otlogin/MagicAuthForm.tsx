@@ -7,7 +7,7 @@ import { IoIosArrowRoundForward, IoIosWarning } from "react-icons/io";
 import Flex from "styled-flex-component";
 
 const Input = styled.input`
-  height : 6vh
+  height : 7vh
   width : 25em
   padding-left : 10px
   border: 1.1px solid #361f94
@@ -82,14 +82,14 @@ const MagicAuthForm = ({ AuthUser }: CustomProps): JSX.Element => {
               value={values.name}
             />
 
-            {errors ? (
+            {errors.name ? (
               <Flex>
                 <IoIosWarning style={{ fontSize: "1.5em", color: "red" }} />
                 <Error> {errors.name} </Error>
               </Flex>
             ) : null}
           </div>
-
+          <br />
           <div>
             <label htmlFor="password" />
             <Input
@@ -102,7 +102,7 @@ const MagicAuthForm = ({ AuthUser }: CustomProps): JSX.Element => {
               value={values.password}
             />
 
-            {errors ? (
+            {errors.password ? (
               <Flex>
                 <IoIosWarning style={{ fontSize: "1.5em", color: "red" }} />
                 <Error> {errors.name} </Error>
