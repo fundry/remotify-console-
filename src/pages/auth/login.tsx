@@ -159,50 +159,44 @@ const Login = (props): JSX.Element => {
         </Text>
       </Heading>
 
-      <Flex justifyCenter>
-        <Card
-          style={{
-            boxShadow: "0px 5px 7px grey"
-          }}
+      {!Loading ? (
+        <Formik
+          initialValues={{ name: "", password: "" }}
+          validationSchema={validation}
+          onSubmit={(values, { setSubmitting }) => {}}
         >
-          <CardHead>
-            <h4> {!Loading ? " Sign in" : "Checking account name"} </h4>
-          </CardHead>
-
-          <CardBody style={{ padding: "1em" }}>
-            <div>
-              {!Name ? null : (
-                <Flex justifyCenter>
-                  <div>
-                    <Flex justifyCenter>
-                      {" "}
-                      <Image
-                        fluid
-                        src={require("../../images/lawyer.png")}
-                        style={{ height: "110px" }}
-                        roundedCircle
-                      />{" "}
-                    </Flex>
-                    <Org> Fundry Organization </Org>
-                    <br />{" "}
-                  </div>
-                </Flex>
-              )}
-            </div>
-
-            {!Loading ? (
-              <Formik
-                initialValues={{ name: "", password: "" }}
-                validationSchema={validation}
-                onSubmit={(values, { setSubmitting }) => {}}
+          {({ isSubmitting, handleChange, handleBlur, values, errors }) => (
+            <Flex justifyCenter>
+              <Card
+                style={{
+                  boxShadow: "0px 5px 7px grey"
+                }}
               >
-                {({
-                  isSubmitting,
-                  handleChange,
-                  handleBlur,
-                  values,
-                  errors
-                }) => (
+                <CardHead>
+                  <h4> {!Loading ? " Sign in" : "Checking account name"} </h4>
+                </CardHead>
+
+                <CardBody style={{ padding: "1em" }}>
+                  <div>
+                    {!Name ? null : (
+                      <Flex justifyCenter>
+                        <div>
+                          <Flex justifyCenter>
+                            {" "}
+                            <Image
+                              fluid
+                              src={require("../../images/lawyer.png")}
+                              style={{ height: "110px" }}
+                              roundedCircle
+                            />{" "}
+                          </Flex>
+                          <Org> Fundry Organization </Org>
+                          <br />{" "}
+                        </div>
+                      </Flex>
+                    )}
+                  </div>
+
                   <div>
                     <form>
                       <div>
@@ -296,37 +290,41 @@ const Login = (props): JSX.Element => {
                         </Link>
                       )}
                     </div>
-                  </div>
-                )}
-              </Formik>
-            ) : (
-              <div style={{ padding: "2em" }}>
-                <br />
-                <Flex justifyCenter>
-                  <Spinner animation="grow" variant="primary" />
-                  <Spinner animation="grow" variant="secondary" />
-                  <Spinner animation="grow" variant="success" />
-                  <Spinner animation="grow" variant="danger" />
-                  <Spinner animation="grow" variant="warning" />
-                  <Spinner animation="grow" variant="info" />
-                  <Spinner animation="grow" variant="light" />
-                </Flex>
-                <br />
-              </div>
-            )}
 
-            <div>
-              <br />
-              <Text style={{ paddingLeft: "15px", textAlign: "center" }}>
-                <a href="https://remotify.netlify.com/register/services">
-                  Create{" "}
-                </a>{" "}
-                an account
-              </Text>
-            </div>
-          </CardBody>
-        </Card>
-      </Flex>
+                    {!Name ? (
+                      <div>
+                        <br />
+                        <Text
+                          style={{ paddingLeft: "15px", textAlign: "center" }}
+                        >
+                          <a href="https://remotify.netlify.com/register/services">
+                            Create{" "}
+                          </a>{" "}
+                          an account
+                        </Text>
+                      </div>
+                    ) : null}
+                  </div>
+                </CardBody>
+              </Card>
+            </Flex>
+          )}
+        </Formik>
+      ) : (
+        <div style={{ padding: "2em" }}>
+          <br />
+          <Flex justifyCenter>
+            <Spinner animation="grow" variant="primary" />
+            <Spinner animation="grow" variant="secondary" />
+            <Spinner animation="grow" variant="success" />
+            <Spinner animation="grow" variant="danger" />
+            <Spinner animation="grow" variant="warning" />
+            <Spinner animation="grow" variant="info" />
+            <Spinner animation="grow" variant="light" />
+          </Flex>
+          <br />
+        </div>
+      )}
     </Body>
   );
 };
